@@ -1,2 +1,6 @@
-<h1>Searchs#index</h1>
-<p>Find me in app/views/searchs/index.html.erb</p>
+<%= form_with url:searchs_path, method: :get do |f| %>
+    <%= f.text_field :word, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.select :id, [["user",1],["post",2]], {prompt: "選択してください"}, :class => 'form-control' %>
+    <%= f.submit "検索する" %>
+  <% end %>
+  <%= @searchs %>

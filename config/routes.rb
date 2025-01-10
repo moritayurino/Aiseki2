@@ -17,9 +17,13 @@ Rails.application.routes.draw do
   get '/about' => 'homes#about'
   resources :users, only: [:show, :edit, :update, :destroy]
   get 'mypage', to: 'users#mypage'
-  resources :posts, only: [:new, :show, :edit, :update, :destroy]
-  # resources :likes
-  # resources :comments
-  # resources :genres
-  # resources :searchs
+  resources :posts, only: [:create, :new, :show, :edit, :update, :destroy]
+  resources :posts do
+    resources :comments
+  end
+  resources :posts do
+    resources :likes, only: [:create, :destroy]
+  end
+  resources :genres
+  resources :searchs
 end

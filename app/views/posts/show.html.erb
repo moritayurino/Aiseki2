@@ -1,7 +1,42 @@
-<h2>タイトル</h2>
-<p><%= @post.title %></p>
+<div>
+  <h2>タイトル</h2>
+  <p><%= @post.title %></p>
 
-<h2>本文</h2>
-<p><%= @post.body %></p>
-<%= link_to "編集", edit_post_path(@post.id) %>
-<%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+  <h2>本文</h2>
+  <p><%= @post.body %></p>
+  <%= link_to "編集", edit_post_path(@post.id) %>
+  <%= link_to "削除", post_path(@post), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+</div>
+
+<div>
+  <p>コメント件数：<%= @post.comments.count %></p>
+  <% @post.comments.each do |comment| %>
+    <%= comment.user.name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+    <% if comment.user == current_user %>
+      <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+    <% end %>
+
+    <% if @post.liked_by?(current_user) %>
+    <p>
+      <%= link_to post_like_path(@post), method: :delete do %>
+        ♥<%= @post.likes.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to post_likes_path(@post), method: :post do %>
+        ♡<%= @post.likes.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+
+
+  <% end %>
+</div>
+<div>
+  <%= form_with model: [@post, @comment] do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>

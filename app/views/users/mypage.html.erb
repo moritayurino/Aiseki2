@@ -8,5 +8,6 @@
   </span>
   <p>本文</p>
   <span><%= post.body %></span>
+    <p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p>
   
 <% end %>
