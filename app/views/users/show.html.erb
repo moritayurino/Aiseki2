@@ -8,7 +8,7 @@
   <%= link_to post_path(post.id) do %>
   <% end %>
   <p>タイトル：<%= post.title %></p>
-  <p>本文：<%= post.body %></p>
+  <p>内容：<%= post.body %></p>
   <p>ユーザーネーム：<%= post.user.name %></p>
   <p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p>
 </div>
