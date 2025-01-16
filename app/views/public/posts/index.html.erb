@@ -1,0 +1,10 @@
+<%= link_to "all", posts_path %>
+<% @genres.each do |genre| %>
+  <%= link_to genre.name, posts_path(genre_id: genre.id) %>
+<% end %><br>
+
+
+<% @posts.each do |post|%>
+  <%= post.inspect %>
+  <hr>
+<% end %>

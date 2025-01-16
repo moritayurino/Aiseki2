@@ -1,3 +1,5 @@
+#require 'devise/orm/active_record'
+
 require_relative "boot"
 
 require "rails/all"

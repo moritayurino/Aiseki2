@@ -1,0 +1,2 @@
+module Admin::DashboardsrailsHelper
+end

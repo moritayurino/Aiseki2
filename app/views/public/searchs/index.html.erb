@@ -1,0 +1,17 @@
+<%= form_with url:searchs_path, method: :get do |f| %>
+    <%= f.text_field :word, rows: '5', placeholder: "検索したいものをここに" %>
+    <%= f.select :id, [["user",1],["post",2]], {prompt: "選択してください"}, :class => 'form-control' %>
+    <%= f.submit "検索する" %>
+  <% end %>
+  <% if @select == "1"%>
+  <% @searchs.each do |user|%>
+  <%= user.name%>
+  <br>
+  <%end %>
+  <% end %>
+  <% if @select == "2"%>
+  <% @searchs.each do |post| %>
+  <%= post.body%>
+  <br>
+  <%end %>
+  <% end %>
