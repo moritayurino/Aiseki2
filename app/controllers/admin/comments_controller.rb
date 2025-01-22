@@ -1,4 +1,4 @@
 class Admin::CommentsController < ApplicationController
-  def index
+  def destroy
   end
 end

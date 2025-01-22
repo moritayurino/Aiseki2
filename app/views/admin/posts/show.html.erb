@@ -1,0 +1,52 @@
+<div class="card-list-container py-5">
+<div class="card w-50 mx-auto mt-4 shadow-lg">
+<div class="card-body">
+      <div class="row">
+        <div class="col-2">
+        </div>
+        <div class="col-10">
+          <p class="card-title"><div>
+   <p><%= @post.genre.name %></p>
+  <span>タイトル</span>
+  <p><%= @post.title %></p>
+
+  <span>内容</span>
+  <p><%= @post.body %></p>
+  <span>ユーザーネーム：<%= @post.user.name %></span>
+  <p>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+  <p><%= @post.address %></p>
+  <%= link_to "削除", addmin_post_path(@post), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+</div>
+<div>
+    <% if @post.liked_by?(current_user) %>
+    </span><p>
+      <%= link_to post_likes_path(@post), method: :delete do %>
+        ♥<%= @post.likes.count %> 相席する
+      <% end %>
+    </p></span>
+    <% else %>
+    <p>
+      <%= link_to post_likes_path(@post), method: :post do %>
+        ♡<%= @post.likes.count %> 相席する
+      <% end %>
+    </p>
+  <% end %>
+
+</div>
+
+<div>
+  <p>コメント件数：<%= @post.comments.count %></p>
+  <% @post.comments.each do |comment| %>
+    <%= comment.user.name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+    <% if comment.user == current_user %>
+      <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+    <% end %>
+  <% end %>
+</div>
+
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

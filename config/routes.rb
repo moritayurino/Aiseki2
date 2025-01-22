@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
   resource :map, only: [:show] 
 
-  namespace :admin do
-    
-  end
-
   devise_for :users, controllers: { sessions: 'public/sessions',registrations:'public/registrations' }
   devise_for :admin, skip: [:registrations, :password], controllers: { sessions: 'admin/sessions' }
   scope module: :public do
@@ -26,8 +22,9 @@ Rails.application.routes.draw do
  
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'
-    resources :users, only: [:destroy]
-    resources :comments, only: [:index, :destroy]
+    resources :users, only: [:show, :destroy]
+    resources :comments, only: [:destroy]
+    resources :posts, only: [:index, :show, :destroy]
   end
 
   # get 'searchs/index'
