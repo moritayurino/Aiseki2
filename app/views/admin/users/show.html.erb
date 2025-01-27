@@ -6,22 +6,22 @@
         </div>
         <div class="col-10">
           <p class="card-title">
+<div>
+  <h3><%= @user.name %></h3>
+</div>
+
 <h2>投稿一覧</h2>
 
 <% @posts.each do |post| %>
-
-  <span>タイトル<span>
+<span>タイトル</span>
   <p><span>
-    <%= link_to post.title, admin_post_path(post.id) %>
-  </span>
-  </p>
+    <%= link_to post.title, admin_post_path(post.id) %></p></span>
   <span>内容</span>
-  <p><span><%= post.body %></span></p>
-  <span>ユーザーネーム：<%= post.user.name %></span>
-  <p><span>投稿日時：<%= post.created_at.strftime('%Y/%m/%d') %></span></p>
+  <p><span><%= post.body %></P></span>
+  <span><p>投稿日時：<%= post.created_at.strftime('%Y/%m/%d') %></span></p>
     <p><%= link_to "#{post.likes.count} 相席", admin_post_path(post.id) %></p>
     <%= link_to "#{post.comments.count} コメント", admin_post_path(post.id) %>
-      </div>
+   </div>
       </div>
     </div>
   </div>

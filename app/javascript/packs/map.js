@@ -14,18 +14,16 @@ async function initMap() {
     mapId: "DEMO_MAP_ID",
     mapTypeControl: false
   });
-
   try {
     const response = await fetch("/posts.json");
     if (!response.ok) throw new Error('Network response was not ok');
 
     const { data: { items } } = await response.json();
     if (!Array.isArray(items)) throw new Error("Items is not an array");
-
     items.forEach( item => {
       const latitude = item.latitude;
       const longitude = item.longitude;
-      const shopName = item.shop_name;
+      const title = item.title;
 
       const marker = new google.maps.marker.AdvancedMarkerElement ({
         position: { lat: latitude, lng: longitude },

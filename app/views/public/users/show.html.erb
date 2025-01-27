@@ -14,6 +14,7 @@
 <h2>投稿一覧</h2>
 
 <% @posts.each do |post| %>
+<% if post.user %>
 <span>タイトル</span>
   <p><span>
     <%= link_to post.title, "/posts/#{post.id}" %></p></span>
@@ -26,4 +27,5 @@
       </div>
     </div>
   </div>
+<% end %>
 <% end %>

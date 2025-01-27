@@ -1,4 +1,6 @@
 class Admin::DashboardsrailsController < ApplicationController
-  def s
+  def index
+  end
+  def destroy
   end
 end

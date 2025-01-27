@@ -19,11 +19,18 @@ class Public::UsersController < ApplicationController
   def update
     id = params[:id].sub(":", "")
     @user = User.find(id)
-    @user.update(user_params)
+    if @user.update(user_params)
     redirect_to user_path(@user.id)
+    else
+    render :edit
+    end
   end
 
   def destroy
+      @user = User.find(params[:id]) 
+      @user.destroy
+      flash[:notice] = 'ユーザーを削除しました。'
+      redirect_to new_user_registration_path
   end
 
   def guest_sign_in

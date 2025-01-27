@@ -12,3 +12,4 @@ json.data do
       json.longitude post.longitude
     end  
   end
+end
