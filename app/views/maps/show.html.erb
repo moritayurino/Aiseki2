@@ -1,5 +1,12 @@
 <div class="container">
-  <div id="map" style="height: 500px"></div>
-</div>
-
-<%= javascript_pack_tag 'map', 'data-turbolinks-track': 'reload' %>
+<div id="map" latitude="<%= @latitude %>" longitude="<%= @longitude %>" style="height: 500px"></div>
+<div class="flex flex-wrap justify-between w-11/12 mx-auto">
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <%= link_to post.title, post, id: "detail-" + post.id.to_s, class: 'my-5 mx-auto spot-card' %>
+      <% end %>
+    <% else %>
+      <p class="text-2xl sm:text-3xl mx-auto my-10">検索結果は見つかりませんでした。</p>
+    <% end %>
+ </div>
+ <%= javascript_pack_tag 'map', 'data-turbolinks-track': 'reload' %>

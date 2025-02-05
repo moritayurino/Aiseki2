@@ -6,6 +6,6 @@ class Admin::DashboardsController < ApplicationController
   end
   def destroy
     @post.delete
-    redirect_to admin_dashboards_path
+    redirect_to admin_dashboard_path
   end
 end

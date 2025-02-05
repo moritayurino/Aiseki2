@@ -1,17 +1,23 @@
+
 <%= form_with url:searchs_path, method: :get do |f| %>
-    <%= f.text_field :word, rows: '5', placeholder: "検索したいものをここに" %>
-    <%= f.select :id, [["user",1],["post",2]], {prompt: "選択してください"}, :class => 'form-control' %>
-    <%= f.submit "検索する" %>
-  <% end %>
-  <% if @select == "1"%>
+  <%= f.text_field :word, rows: '5', placeholder: "検索したいものをここに" %>
+  <%= f.select :model, [["  ユーザー",1],["投稿内容",2]], {prompt: "検索したいものを選択"}, :class => 'form-control' %>
+  <%= f.select :genre, [["相席","相席"],["スポーツ","スポーツ"],["コンサート","コンサート"]], {prompt: "ジャンルを選択"}, :class => 'form-control' %>
+  <%= f.submit "検索する" %>
+<% end %>
+<% if @select == "1"%>
   <% @searchs.each do |user|%>
-  <%= user.name%>
-  <br>
-  <%end %>
+    <%= link_to user.name, user_path(user.id) %>
+    <br>
   <% end %>
-  <% if @select == "2"%>
+<% elsif @select == "2"%>
   <% @searchs.each do |post| %>
-  <%= post.body%>
-  <br>
+    <%= link_to post.body, post_path(post.id)%>
+    <br>
   <%end %>
-  <% end %>
+<% elsif @genre %>
+<% @searchs.each do |post| %>
+    <%= link_to post.body, post_path(post.id)%>
+    <br>
+  <%end %>
+<% end %>

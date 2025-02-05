@@ -20,7 +20,7 @@
  <div class="input-group mb-3 mt-4">
             <div class="input-group-prepend">
             </div>
-<span><p><%= f.collection_select :genre_id, Genre.all, :id, :name, { include_blank: "--選択してください--" }, { class: "form-control" } %></span></p>
+<span><p><%= f.collection_select :genre_id, Genre.all, :id, :name, { include_blank: "--ジャンル選択--" }, { class: "form-control" } %></span></p>
   <span><p><%= f.text_field :title, class: "form-control", placeholder: "タイトル"%></span></p>
   <span><p><%= f.text_area :body, class: "form-control", rows: "3", placeholder: "内容" %></span></p>
 	<div class="input-group mb-3 mt-4">

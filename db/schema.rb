@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_01_16_114534) do
+ActiveRecord::Schema.define(version: 2025_02_05_015734) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -56,6 +56,11 @@ ActiveRecord::Schema.define(version: 2025_01_16_114534) do
     t.float "longitude", default: 0.0
     t.integer "genre_id"
     t.index ["genre_id"], name: "index_posts_on_genre_id"
+  end
+
+  create_table "searches", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

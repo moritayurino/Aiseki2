@@ -7,15 +7,28 @@ let map;
 async function initMap() {
   const { Map } = await google.maps.importLibrary("maps");
   const {AdvancedMarkerElement} = await google.maps.importLibrary("marker")
-
+  let latitude = document.getElementById("map").getAttribute("latitude")
+  let longitude = document.getElementById("map").getAttribute("longitude")
+  console.log(latitude)
+  console.log(longitude)
   map = new Map(document.getElementById("map"), {
-    center: { lat: 35.681236, lng: 139.767125 }, 
-    zoom: 15,
+//    center: { lat: 35.681236, lng: 139.767125 }, 
+    center: { lat: Number.parseFloat(latitude), lng: Number.parseFloat(longitude) }, 
+    zoom: 8,
     mapId: "DEMO_MAP_ID",
     mapTypeControl: false
   });
   try {
-    const response = await fetch("/posts.json");
+    console.log(location.href);
+    let url = '';
+    if (location.pathname == "/map" ) {
+      url =  location.href.replace('/map?','/map.json?');
+      console.log(url);
+    }
+    else{
+      url = "/posts.json";
+    }
+    const response = await fetch(url);
     if (!response.ok) throw new Error('Network response was not ok');
 
     const { data: { items } } = await response.json();
@@ -36,5 +49,6 @@ async function initMap() {
   }
   
 }
+console.log("AAA");
 
 initMap()

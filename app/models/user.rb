@@ -7,8 +7,6 @@ class User < ApplicationRecord
   has_many :comments, :dependent => :destroy
   has_many :likes, :dependent => :destroy
   validates :name, presence: true
-  validates :email, presence: true
-  validates :password, presence: true
   GUEST_USER_EMAIL = "guest@example.com"
 
   def self.guest

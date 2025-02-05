@@ -1,28 +1,61 @@
-<div class="card-list-container py-5">
-<div class="card w-50 mx-auto mt-4 shadow-lg">
-<div class="card-body">
-      <div class="row">
-        <div class="col-2">
-        </div>
-        <div class="col-10">
-          <p class="card-title">
+<%= form_with url: map_path, :method => 'get' do |f| %>
+    <%= f.text_field :location, placeholder: "行きたい場所を入力" %>
+    <%= f.select :keyword, [
+      ['距離が近い順', 'near']
+    ] %>
+    <%= f.submit '検索', class: "button p-2" %>
+  <% end %>
+  <%= flash[:error] %>
+<script>
+  function geoFindMe() {
+    function success(position) {
+      const latitude  = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      document.getElementById('location').value = `${latitude},${longitude}`;
+    }
+
+    function error() {
+      alert('エラーが発生しました。')
+    }
+
+    if(!navigator.geolocation) {
+       alert('Geolocation is not supported by your browser');
+    } else {
+      navigator.geolocation.getCurrentPosition(success, error);
+    }
+  }
+
+  document.querySelector('#get_current_post').addEventListener('click', geoFindMe);
+</script>
 <h2>投稿一覧</h2>
-
-<% @posts.each do |post| %>
-
-  <span>タイトル<span>
-  <p><span>
-    <%= link_to post.title, "/posts/#{post.id}" %>
-  </span>
-  </p>
-  <span>内容</span>
-  <p><span><%= post.body %></span></p>
-  <span>ユーザーネーム：<%= post.user.name %></span>
-  <p><span>投稿日時：<%= post.created_at.strftime('%Y/%m/%d') %></span></p>
-    <p><%= link_to "#{post.likes.count} 相席", post_path(post.id) %></p>
-    <%= link_to "#{post.comments.count} コメント", post_path(post.id) %>
-      </div>
-      </div>
-    </div>
-  </div>
-<% end %>
+<div class="container">
+  <div id="map" latitude="35.681236" longitude="139.767125" style="height: 500px"></div>
+</div>
+<br>
+<%= javascript_pack_tag 'map', 'data-turbolinks-track': 'reload' %>
+<br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+  <th>ジャンル</th>
+  <th>タイトル</th>
+  <th>場所</th>
+  <th>ユーザーネーム</th>
+  <th>投稿日時</th>
+  <th colspan="2"></th>
+  </tr>
+  </thead>
+  <% @posts.each do |post| %>
+  <tbody>
+      <tr>
+        <td><%= post.genre.name %></td>
+        <td><%= link_to post.title, "/posts/#{post.id}" %></td>
+        <td><%= post.address %></td>
+  <td><%= post.user.name %></td>
+  <td><%= post.created_at.strftime('%Y/%m/%d %H:%M:%S') %></span></td>
+    <td><%= post.likes.count %>相席</td>
+    <td><%= post.comments.count %>コメント
+    <% end %></td>
+    </tr>
+</tbody>
+</table>

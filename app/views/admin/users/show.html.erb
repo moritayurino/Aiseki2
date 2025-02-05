@@ -1,28 +1,31 @@
-<div class="card-list-container py-5">
-<div class="card w-50 mx-auto mt-4 shadow-lg">
-<div class="card-body">
-      <div class="row">
-        <div class="col-2">
-        </div>
-        <div class="col-10">
-          <p class="card-title">
-<div>
+
   <h3><%= @user.name %></h3>
-</div>
 
 <h2>投稿一覧</h2>
+<table class="table table-striped">
 
+  <thead>
+    <tr>
+    <th>ジャンル</th>
+    <th>タイトル</th>
+    <tH>場所</th>
+    <th>投稿日時</th>
+    <th colspan="2"></th>
+  </tr>
+  </thead>
 <% @posts.each do |post| %>
-<span>タイトル</span>
-  <p><span>
-    <%= link_to post.title, admin_post_path(post.id) %></p></span>
-  <span>内容</span>
-  <p><span><%= post.body %></P></span>
-  <span><p>投稿日時：<%= post.created_at.strftime('%Y/%m/%d') %></span></p>
-    <p><%= link_to "#{post.likes.count} 相席", admin_post_path(post.id) %></p>
-    <%= link_to "#{post.comments.count} コメント", admin_post_path(post.id) %>
-   </div>
-      </div>
-    </div>
-  </div>
+<tbody>
+      <tr>
+  <td><%= post.genre.name %></td>
+  <td><%= link_to post.title, admin_post_path(post.id) %></td>
+  <td><%= post.address %></td>
+  <td><%= post.created_at.strftime('%Y/%m/%d %H:%M:%S') %></td>
+    <td><%= post.likes.count %>相席</td>
+    <td><%= post.comments.count %>コメント</td>
+<% end %>
+</tr>
+</tbody>
+</table>
+<% if admin_signed_in? || current_user.id == @user.id %>
+<%= link_to "退会",admin_user_path, class: "destroy-user", method: :delete, "data-confirm" => "本当に退会しますか？" %>
 <% end %>
