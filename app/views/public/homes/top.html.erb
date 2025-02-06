@@ -1,20 +1,21 @@
 <%= form_with url: map_path, :method => 'get' do |f| %>
-    <%= f.text_field :location, placeholder: "行きたい場所を入力" %>
+  <br>
+  <%= f.text_field :location, placeholder: "探したい場所を入力" %>
     <%= f.select :keyword, [
       ['距離が近い順', 'near']
     ] %>
     <%= f.submit '検索', class: "button p-2" %>
-  <% end %>
+<% end %>
   <%= flash[:error] %>
-<script>
-  function geoFindMe() {
-    function success(position) {
+    <script>
+      function geoFindMe() {
+      function success(position) {
       const latitude  = position.coords.latitude;
       const longitude = position.coords.longitude;
       document.getElementById('location').value = `${latitude},${longitude}`;
     }
 
-    function error() {
+      function error() {
       alert('エラーが発生しました。')
     }
 
@@ -26,36 +27,38 @@
   }
 
   document.querySelector('#get_current_post').addEventListener('click', geoFindMe);
-</script>
+    </script>
+<br>
 <h2>投稿一覧</h2>
-<div class="container">
-  <div id="map" latitude="35.681236" longitude="139.767125" style="height: 500px"></div>
-</div>
-<br>
-<%= javascript_pack_tag 'map', 'data-turbolinks-track': 'reload' %>
-<br>
-<table class="table table-striped">
-  <thead>
-    <tr>
-  <th>ジャンル</th>
-  <th>タイトル</th>
-  <th>場所</th>
-  <th>ユーザーネーム</th>
-  <th>投稿日時</th>
-  <th colspan="2"></th>
-  </tr>
-  </thead>
-  <% @posts.each do |post| %>
-  <tbody>
-      <tr>
-        <td><%= post.genre.name %></td>
-        <td><%= link_to post.title, "/posts/#{post.id}" %></td>
-        <td><%= post.address %></td>
-  <td><%= post.user.name %></td>
-  <td><%= post.created_at.strftime('%Y/%m/%d %H:%M:%S') %></span></td>
-    <td><%= post.likes.count %>相席</td>
-    <td><%= post.comments.count %>コメント
-    <% end %></td>
-    </tr>
-</tbody>
-</table>
+  <div class="container">
+    <div id="map" latitude="35.681236" longitude="139.767125" style="height: 500px"></div>
+    </div>
+      <br>
+        <%= javascript_pack_tag 'map', 'data-turbolinks-track': 'reload' %>
+          <br>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>ジャンル</th>
+                  <th>タイトル</th>
+                  <th>場所</th>
+                  <th>ユーザーネーム</th>
+                  <th>投稿日時</th>
+                  <th colspan="2"></th>
+                 </tr>
+              </thead>
+              <% @posts.each do |post| %>
+                <tbody>
+                  <tr>
+                    <td><%= post.genre.name %></td>
+                    <td><%= link_to post.title, "/posts/#{post.id}" %></td>
+                    <td><%= post.address %></td>
+                    <td><%= post.user.name %></td>
+                    <td><%= post.created_at.strftime('%Y/%m/%d %H:%M:%S') %></span></td>
+                    <td><%= post.likes.count %>相席</td>
+                    <td><%= post.comments.count %>コメント
+              <% end %>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>

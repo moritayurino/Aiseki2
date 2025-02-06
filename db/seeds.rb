@@ -26,19 +26,19 @@ users_attributes.each do |user_attributes|
 end
 
 User.find(1).posts.create!(title: "席空いてます") do |post|
-  post.body = "足を休ませたい方どうぞ"
+  post.body = "窓側の席空いてます！足を休ませたい方どうぞ。相席しませんか？"
   post.address = "東京都千代田区丸の内1丁目"
   post.genre = Genre.find(1)
 end
 
 User.find(2).posts.create!(title: "テニス") do |post|
-  post.body = "一緒にしませんか"
+  post.body = "テニススクールに通ってますが、練習相手がいなくて困ってます。このあと15時に公園で一緒にテニスしませんか？"
   post.address = "愛知県名古屋市中村区名駅１丁目１−４"
   post.genre = Genre.find(2)
 end
 
 User.find(3).posts.create!(title: "アイドル") do |post|
-  post.body = 'ライブ一緒に行きませんか'
+  post.body = '今年12月に開催するあのアイドルが大好きです。一緒に行く相手がいなくて困ってます。ライブ一緒に行きませんか？'
   post.address = "大阪府大阪市淀川区西中島5-16-1"
   post.genre = Genre.find(3)
 end

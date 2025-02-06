@@ -13,9 +13,11 @@ class Public::SearchsController < ApplicationController
       else
         @searchs = @genre.posts.where("body like ?","%#{@word}%")
       end
-    elsif params[:genre]
+    elsif params[:genre].present?
       @genre = Genre.find_by(:name => params[:genre])
       @searchs = @genre.posts
+    elsif params[:genre] && @select.empty?
+      @searchs = Post.where("body like ?","%#{@word}%")
     end
   end
 end

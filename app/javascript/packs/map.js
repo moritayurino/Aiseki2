@@ -19,11 +19,9 @@ async function initMap() {
     mapTypeControl: false
   });
   try {
-    console.log(location.href);
     let url = '';
     if (location.pathname == "/map" ) {
       url =  location.href.replace('/map?','/map.json?');
-      console.log(url);
     }
     else{
       url = "/posts.json";

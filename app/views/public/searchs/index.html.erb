@@ -1,10 +1,16 @@
-
+<div class='mx-auto col-11 col-sm-10 col-lg-8 col-xl-6'>
+<h2>検索</h2>
 <%= form_with url:searchs_path, method: :get do |f| %>
+  ユーザー/投稿 検索<br>
   <%= f.text_field :word, rows: '5', placeholder: "検索したいものをここに" %>
-  <%= f.select :model, [["  ユーザー",1],["投稿内容",2]], {prompt: "検索したいものを選択"}, :class => 'form-control' %>
-  <%= f.select :genre, [["相席","相席"],["スポーツ","スポーツ"],["コンサート","コンサート"]], {prompt: "ジャンルを選択"}, :class => 'form-control' %>
+  <%= f.select :model, [["  ユーザー名",1],["投稿の内容",2]], {prompt: "選択してください"}, :class => 'form-control' %>
+  <br>
+  ジャンル検索
+  <%= f.select :genre, [["相席","相席"],["スポーツ","スポーツ"],["コンサート","コンサート"]], {prompt: "選択してください"}, :class => 'form-control' %>
+  <br>
   <%= f.submit "検索する" %>
 <% end %>
+<br>
 <% if @select == "1"%>
   <% @searchs.each do |user|%>
     <%= link_to user.name, user_path(user.id) %>
@@ -15,9 +21,10 @@
     <%= link_to post.body, post_path(post.id)%>
     <br>
   <%end %>
-<% elsif @genre %>
+<% elsif @genre && @select.empty? %>
 <% @searchs.each do |post| %>
     <%= link_to post.body, post_path(post.id)%>
     <br>
-  <%end %>
 <% end %>
+<% end %>
+</div>

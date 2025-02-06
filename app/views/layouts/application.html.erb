@@ -1,75 +1,74 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Aiseki</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <html>
+    <head>
+      <title>Aiseki</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+          <%= csrf_meta_tags %>
+            <%= csp_meta_tag %>
+              <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+                <script src="https://kit.fontawesome.com/fd20c589ae.js" crossorigin="anonymous"></script>
+                  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>            
+                    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+     </head>
 
-    <script src="https://kit.fontawesome.com/fd20c589ae.js" crossorigin="anonymous"></script>
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body class="d-flex flex-column vh-100">
-    <header class="shadow-sm">
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    <body class="d-flex flex-column vh-100">
+      <header class="shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-    <% if user_signed_in? %>
-      <li>
-        <%= link_to "Aiseki", root_path %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "新規投稿", new_post_path, class: 'nav-link text-dark' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "検索", searchs_path, class: 'nav-link text-dark' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "マイページ", user_path(current_user.id), class: 'nav-link text-dark' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "Aiseki", root_path %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "アバウト", about_path, class: 'nav-link text-dark' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "ゲストログイン", guest_sign_in_users_path, method: :post, class: 'nav-link text-dark' %>
-      </li>
-    <% end %>
-     </ul>
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to "Aiseki", root_path, class: 'nav-link text-dark' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "新規投稿", new_post_path, class: 'nav-link tenxt-dark' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "検索", searchs_path, class: 'nav-link text-dark' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "マイページ", user_path(current_user.id), class: 'nav-link text-dark' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "Aiseki", root_path, class: 'nav-link text-dark' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "アバウト", about_path, class: 'nav-link text-dark' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ゲストログイン", guest_sign_in_users_path, method: :post, class: 'nav-link text-dark' %>
+        </li>
+      <% end %>
+            </ul>
+            </div>
           </div>
-        </div>
-      </nav>
-  </header>
-  <main class="mb-auto">
-  <p id="notice"></p>
+        </nav>
+      </header>
+    <main class="mb-auto">
+      <p id="notice"></p>
         <div class='container px-5 px-sm-0'>
-  <%= yield %>
-  </main>
-  <footer class="bg-dark text-white pt-5 pb-4">
+      <%= yield %>
+    </main>
+    <footer class="bg-white text-white pt-5 pb-4">
       <div class="container">
         <div class="row no-gutters">
           <div class="col-md-4">
-           </div>
+          </div>
           <div class="col-md-8">
             <ul class="p-0 list-unstyled">
             </ul>
@@ -77,9 +76,9 @@
         </div>
       </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-jpostal-ja@2.14.45/jquery.jpostal.min.js"></script>
-  </div>
-  </div>
-</div>
-  </body>
-</html>
+      <script src="https://cdn.jsdelivr.net/npm/jquery-jpostal-ja@2.14.45/jquery.jpostal.min.js"></script>
+      </div>
+      </div>
+      </div>
+    </body>
+  </html>
